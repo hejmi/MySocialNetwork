@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/jarRepositories.xml
+/inspectionProfiles/Project_Default.xml
+/compiler.xml
+/misc.xml
+/vcs.xml
+/.gitignore
+/MySocialNetwork.iml
