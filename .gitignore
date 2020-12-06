@@ -8,3 +8,6 @@
 /vcs.xml
 /.gitignore
 /MySocialNetwork.iml
+/target/test-classes/socialnetwork/PostingTest.class
+/target/test-classes/socialnetwork/Stepdefs.class
+/target/classes/socialnetwork/TimeLine.class

@@ -8,4 +8,8 @@ public class TimeLine {
     public String getPost() {
         return "Hello World";
     }
+
+    public String getUser() {
+        return "Alice";
+    }
 }

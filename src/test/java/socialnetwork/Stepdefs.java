@@ -23,5 +23,6 @@ public class Stepdefs {
     @Then("the post should be published on personal timeline")
     public void thePostShouldBePublishedOnPersonalTimeline() {
         assertEquals("Hello World", timeLine.getPost());
+        assertEquals("Alice", timeLine.getUser());
     }
 }
