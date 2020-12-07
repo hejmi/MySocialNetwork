@@ -46,4 +46,20 @@ public class Stepdefs {
         assertEquals("Hello world", theTimeLine.get(0).postedmessage);
         assertEquals("I'm happy today", theTimeLine.get(1).postedmessage);
     }
+
+    @Given("Bob wants to read Alice's timeline")
+    public void bobWantsToReadAliceSTimeline() {
+        theTimeLine.add(new TimeLine("Alice", "Hello world"));
+        theTimeLine.add(new TimeLine("Alice", "I'm happy today"));
+    }
+
+    @When("{string} enters {string}'s timeline")
+    public void entersSTimeline(String arg0, String arg1) {
+    }
+
+    @Then("he should see all the published messages")
+    public void heShouldSeeAllThePublishedMessages() {
+        assertEquals("Hello world", theTimeLine.get(0).postedmessage);
+        assertEquals("I'm happy today", theTimeLine.get(1).postedmessage);
+    }
 }

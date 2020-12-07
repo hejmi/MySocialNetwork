@@ -9,3 +9,8 @@ Feature: Social Networking is fun
     Given posting two messages to personal timeline
     When "Alice" posts "Hello world" and "I'm happy today"
     Then the posts should be published on personal timeline
+
+  Scenario: A user wants to read another users timeline
+    Given Bob wants to read Alice's timeline
+    When "Bob" enters "Alice"'s timeline
+    Then he should see all the published messages
