@@ -11,7 +11,6 @@ Feature: Social Networking is fun
     Then the posts should be published on "Alice"'s timeline
 
   Scenario: A user wants to read another users timeline
-    Given Bob wants to read Alice's timeline
     Given user "Bob" and "Alice" exists
     When "Bob" enters "Alice"'s timeline
     Then he should see all the published messages from "Alice"
