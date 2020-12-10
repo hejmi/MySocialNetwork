@@ -9,10 +9,10 @@ public class TimeLine {
     }
 
     public String getPost() {
-        return "Hello World";
+        return this.postedmessage;
     }
 
     public String getUser() {
-        return "Alice";
+        return this.username;
     }
 }
