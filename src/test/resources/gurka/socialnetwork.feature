@@ -16,7 +16,6 @@ Feature: Social Networking is fun
     Then he should see all the published messages from "Alice"
 
    Scenario: Following another user
-     Given A user wants to follow another user
      Given user "Charlie", "Alice" and "Bob" exists
      When "Charlie" subscribes to the timelines for "Alice" and "Bob"
      Then it will return an aggregated list of subscriptions for "Charlie"

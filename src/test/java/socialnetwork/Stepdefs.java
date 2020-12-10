@@ -73,12 +73,13 @@ public class Stepdefs {
         assertEquals(List.of("Hello world", "I'm happy today"), h2Conn.showTimeLine(arg0));
     }
 
-    @Given("A user wants to follow another user")
-    public void aUserWantsToFollowAnotherUser() {
-        h2Conn = new TimeLineH2Dao();
+    @Given("user {string}, {string} and {string} exists")
+    public void checkThreeUsers(String arg0, String arg1, String arg2) {
+        h2Conn.checkIfUserExists(arg0);
+        h2Conn.checkIfUserExists(arg1);
+        h2Conn.checkIfUserExists(arg2);
     }
-
-    @When("{string} subscribes to {string} and {string}")
+    @When("{string} subscribes to the timelines for {string} and {string}")
     public void subscribesToAnd(String arg0, String arg1, String arg2) {
         h2Conn.subscribe(arg0, arg1);
         h2Conn.subscribe(arg0, arg2);
