@@ -79,4 +79,19 @@ public class Stepdefs {
     public void itWillReturnAnAggregatedListOfSubscriptions(String arg0) {
        assertEquals(List.of("Alice", "Bob"), h2Conn.following(arg0) );
     }
+
+    @Given("Linking to another user")
+    public void linkingToAnotherUser() {
+        h2Conn = new TimeLineH2Dao();
+    }
+
+    @When("{string} posts a message containing @{string}")
+    public void postsAMessageContaining(String arg0, String arg1) {
+        h2Conn.publish(new TimeLine(arg0,"My best friend is @"+arg1));
+    }
+
+    @Then("{string}s post should include a link to {string}")
+    public void thePostShouldIncludeALinkTo(String arg0, String arg1) {
+        assertTrue(h2Conn.showTimeLine(arg0).toString().contains("@"+arg1));
+    }
 }

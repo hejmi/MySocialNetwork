@@ -19,3 +19,8 @@ Feature: Social Networking is fun
      Given A user wants to follow another user
      When "Charlie" subscribes to "Alice" and "Bob"
      Then it will return an aggregated list of subscriptions for "Charlie"
+
+   Scenario: Mentions of another user on personal timeline
+     Given Linking to another user
+     When "Bob" posts a message containing @"Charlie"
+     Then "Bob"s post should include a link to "Charlie"
