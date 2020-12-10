@@ -59,7 +59,6 @@ public class TimeLineH2Dao implements TimeLineDao{
 
     @Override
     public void close() {
-
     }
 
     public void subscribe(String username, String follows) {
@@ -101,7 +100,7 @@ public class TimeLineH2Dao implements TimeLineDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (result == "") {
+        if (result.equals("")) {
             try {
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO users (user) values (?)");
                 ps.setString(1, username);

@@ -7,7 +7,7 @@ Feature: Social Networking is fun
 
   Scenario: A user can post two messages to personal timeline
     Given user "Alice" exists and posts two messages
-    When "Alice" posts "Hello world" and "I'm happy today"
+    When "Alice" posts "I'm happy today" and "What are you doing?"
     Then the posts should be published on "Alice"'s timeline
 
   Scenario: A user wants to read another users timeline
