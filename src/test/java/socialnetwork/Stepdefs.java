@@ -9,26 +9,28 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class Stepdefs {
     public List <TimeLine> theTimeLine = new ArrayList<>();
     private TimeLineH2Dao h2Conn;
 
-    @Given("posting to personal timeline")
-    public void postingToPersonalTimeline() {
-        //timeLine = new TimeLine();
+    @Given("user {string} exists and posts one message")
+    public void userExistsAndPostsMessage(String arg0) {
+        h2Conn = new TimeLineH2Dao();
+        h2Conn.checkIfUserExists(arg0);
     }
 
     @When("{string} posts {string}")
     public void posts(String arg0, String arg1) {
-        theTimeLine.add(new TimeLine(arg0, arg1));
+        //theTimeLine.add(new TimeLine(arg0, arg1));
+        h2Conn.publish(new TimeLine(arg0, arg1));
 
     }
 
-    @Then("the post should be published on personal timeline")
-    public void thePostShouldBePublishedOnPersonalTimeline() {
-        assertEquals("Hello world", theTimeLine.get(0).postedmessage);
-        assertEquals("Alice", theTimeLine.get(0).username);
+    @Then("the post should be published on {string}'s timeline")
+    public void thePostShouldBePublishedOnPersonalTimeline(String arg0) {
+        //assertEquals("Hello world", theTimeLine.get(0).postedmessage);
+        //assertEquals("Alice", theTimeLine.get(0).username);
+        assertEquals(List.of("Hello world"), h2Conn.showTimeLine(arg0));
     }
 
     @Given("posting two messages to personal timeline")
@@ -94,4 +96,5 @@ public class Stepdefs {
     public void thePostShouldIncludeALinkTo(String arg0, String arg1) {
         assertTrue(h2Conn.showTimeLine(arg0).toString().contains("@"+arg1));
     }
+
 }

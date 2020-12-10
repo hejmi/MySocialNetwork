@@ -12,6 +12,7 @@ public class TimeLineH2Dao implements TimeLineDao{
         try {
             if (conn!=null) return;
             conn = DriverManager.getConnection("jdbc:h2:mem:mymemdb.db", "SA", "");
+            conn.prepareStatement("CREATE TABLE users (user varchar(40))").execute();
             conn.prepareStatement("CREATE TABLE timelines (user varchar(40), post varchar(255))").execute();
             conn.prepareStatement("CREATE TABLE subscriptions (user varchar(40), follows varchar(40))").execute();
 
@@ -86,5 +87,29 @@ public class TimeLineH2Dao implements TimeLineDao{
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    public void checkIfUserExists(String username) {
+        String result = "";
+        try {
+            String query = "SELECT * FROM timelines WHERE user = '" + username + "'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                result = rs.getString("user");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (result == "") {
+            try {
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO users (user) values (?)");
+                ps.setString(1, username);
+                ps.execute();
+                conn.commit();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
