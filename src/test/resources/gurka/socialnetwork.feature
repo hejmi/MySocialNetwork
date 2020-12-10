@@ -14,3 +14,8 @@ Feature: Social Networking is fun
     Given Bob wants to read Alice's timeline
     When "Bob" enters "Alice"'s timeline
     Then he should see all the published messages
+
+   Scenario: Following another user
+     Given A user wants to follow another user
+     When "Charlie" subscribes to "Alice" and "Bob"
+     Then it will return an aggregated list of subscriptions for "Charlie"

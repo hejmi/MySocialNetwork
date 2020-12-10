@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Stepdefs {
     public List <TimeLine> theTimeLine = new ArrayList<>();
+    private TimeLineH2Dao h2Conn;
 
     @Given("posting to personal timeline")
     public void postingToPersonalTimeline() {
@@ -61,5 +62,21 @@ public class Stepdefs {
     public void heShouldSeeAllThePublishedMessages() {
         assertEquals("Hello world", theTimeLine.get(0).postedmessage);
         assertEquals("I'm happy today", theTimeLine.get(1).postedmessage);
+    }
+
+    @Given("A user wants to follow another user")
+    public void aUserWantsToFollowAnotherUser() {
+        h2Conn = new TimeLineH2Dao();
+    }
+
+    @When("{string} subscribes to {string} and {string}")
+    public void subscribesToAnd(String arg0, String arg1, String arg2) {
+        h2Conn.subscribe(arg0, arg1);
+        h2Conn.subscribe(arg0, arg2);
+    }
+
+    @Then("it will return an aggregated list of subscriptions for {string}")
+    public void itWillReturnAnAggregatedListOfSubscriptions(String arg0) {
+       assertEquals(List.of("Alice", "Bob"), h2Conn.following(arg0) );
     }
 }
