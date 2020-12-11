@@ -1,12 +1,12 @@
 Feature: Social Networking is fun
 
   Scenario: A user can post a message to personal timeline
-    Given user "Alice" exists and posts one message
+    Given user "Alice" exists
     When "Alice" posts "Hello world"
     Then the post should be published on "Alice"'s timeline
 
   Scenario: A user can post two messages to personal timeline
-    Given user "Alice" exists and posts two messages
+    Given user "Alice" exists
     When "Alice" posts "I'm happy today" and "What are you doing?"
     Then the posts should be published on "Alice"'s timeline
 
