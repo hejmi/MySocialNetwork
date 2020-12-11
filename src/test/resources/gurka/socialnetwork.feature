@@ -24,3 +24,8 @@ Feature: Social Networking is fun
      Given user "Bob" and "Charlie" exists
      When "Bob" posts a message containing @"Charlie"
      Then "Bob"s post should include a link to "Charlie"
+
+   Scenario: Web links in posts
+     Given user "Alice" exists
+     When "Alice" posts a message with a "https://www.google.com"
+     Then the post should include a clickable "https://www.google.com"

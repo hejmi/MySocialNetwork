@@ -98,4 +98,16 @@ public class Stepdefs {
         System.out.println(h2Conn.showTimeLine(arg0).get(0));
     }
 
+    @When("{string} posts a message with a {string}")
+    public void postsAMessageWithA(String arg0, String arg1) {
+        h2Conn.publish(new TimeLine(arg0, arg1));
+        System.out.println("\n- - - - - - - S C E N A R I O - 6 - - - - - - -");
+        System.out.println(h2Conn.showTimeLine(arg0).get(3));
+    }
+
+    @Then("the post should include a clickable {string}")
+    public void thePostShouldIncludeAClickable(String arg0) {
+        assertTrue(h2Conn.showTimeLine("Alice").toString().contains(arg0));
+
+    }
 }
