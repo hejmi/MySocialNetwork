@@ -110,4 +110,17 @@ public class Stepdefs {
         assertTrue(h2Conn.showTimeLine("Alice").toString().contains(arg0));
 
     }
+
+    @When("{string} sends {string} to {string}")
+    public void sendsADmTo(String arg0, String arg1, String arg2) {
+        h2Conn.privateMessage(arg0, arg2, arg1);
+    }
+
+    @Then("{string} should see the message in the inbox")
+    public void shouldSeeTheMessageInTheInbox(String arg0) {
+        assertEquals(List.of("Mallory wrote: This is a private message"), h2Conn.readPM(arg0));
+        System.out.println("\n- - - - - - - S C E N A R I O - 7 - - - - - - -");
+        System.out.println("Your private messages:");
+        System.out.println(h2Conn.readPM(arg0));
+    }
 }

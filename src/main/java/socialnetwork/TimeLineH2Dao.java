@@ -15,6 +15,7 @@ public class TimeLineH2Dao implements TimeLineDao{
             conn.prepareStatement("CREATE TABLE users (user varchar(40))").execute();
             conn.prepareStatement("CREATE TABLE timelines (user varchar(40), post varchar(255))").execute();
             conn.prepareStatement("CREATE TABLE subscriptions (user varchar(40), follows varchar(40))").execute();
+            conn.prepareStatement("CREATE TABLE pm (fromuser varchar(40), touser varchar(40), message varchar(255))").execute();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -110,5 +111,33 @@ public class TimeLineH2Dao implements TimeLineDao{
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void privateMessage(String fromuser, String touser, String message) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO pm (fromuser, touser, message) values (?,?,?)");
+            ps.setString(1, fromuser);
+            ps.setString(2, touser);
+            ps.setString(3, message);
+            ps.execute();
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> readPM(String username) {
+        List<String>result = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM pm WHERE touser = '"+username+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                result.add(rs.getString("fromuser") + " wrote: " + rs.getString("message"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 }

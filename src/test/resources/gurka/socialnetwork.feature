@@ -29,3 +29,8 @@ Feature: Social Networking is fun
      Given user "Alice" exists
      When "Alice" posts a message with a "https://www.google.com"
      Then the post should include a clickable "https://www.google.com"
+
+   Scenario: Direct Messaging
+     Given user "Mallory" and "Alice" exists
+     When "Mallory" sends "This is a private message" to "Alice"
+     Then "Alice" should see the message in the inbox
